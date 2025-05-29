@@ -1,64 +1,107 @@
 # Check Validator Registration Script
 
-This script helps you verify if your sidechain validator public key is registered in the Midnight Testnet for a given epoch.
+This script helps you verify whether your **Sidechain Public Key** is registered on the Midnight **Testnet** for Validator.
 
-## 📥 Download
+---
 
-You can directly download the script using:
+## 🧪 Tested Environment
+
+Tested on:
+
+```
+Midnight Sidechain Node - Testnet - Version: 0.12.0-cab67f3b
+```
+
+---
+
+## ⚙️ How It Works
+
+The script performs the following steps:
+
+1. ✅ **Current Epoch Check**  
+   Verifies if your **Sidechain Public Key** is registered in the **current epoch**.
+
+2. 🕒 **Future Epoch Check**  
+   If not registered, it checks **two epochs ahead** to see if your validator is scheduled to be active soon.
+
+3. ❌ **No Registration Found**  
+   If your key is not found in either check, it means **registration has not gone through**.
+
+   <img width="921" alt="Not Registered" src="https://github.com/user-attachments/assets/9f72f95b-c4d6-4588-a2c4-5fb9aaf6dfee" />
+
+4. 📋 **Validator Details (If Registered)**  
+   If registered, it will print **detailed validator metadata**.
+
+   <img width="973" alt="Registered Validator" src="https://github.com/user-attachments/assets/be66ad38-5593-4dcc-8346-55d85b303c9b" />
+
+---
+
+## 📥 Download the Script
+
+Use `curl` to download the script directly:
 
 ```bash
-curl -O https://raw.githubusercontent.com/Midnight-Scripts/Check_-Registration/refs/heads/main/check_registration.sh?token=GHSAT0AAAAAAC6QXCRC67UOIQ7NJW2UZV342BXVFSQ
+curl -O "https://raw.githubusercontent.com/Midnight-Scripts/Check_Registration/refs/heads/main/check_registration.sh?token=GHSAT0AAAAAAC6QXCRDSGHHEBXFFQVX2B622BXVN6Q"
+```
+
+Make it executable:
+
+```bash
 chmod +x check_registration.sh
 ```
-📦 Clone from GitHub
 
-Alternatively, you can clone the repository:
+Run the script:
 
-git clone https://github.com/Midnight-Scripts/Check_-Registration.git
-cd Check_-Registration
+```bash
+./check_registration.sh
+```
+
+---
+
+## 📦 Clone from GitHub
+
+Alternatively, you can clone the repo:
+
+```bash
+git clone https://github.com/Midnight-Scripts/Check_Registration.git
+cd Check_Registration
 chmod +x check_registration.sh
+./check_registration.sh
+```
 
-📄 Requirements
+---
 
-Make sure you have partner-chains-public-keys.json in the same directory as this script.
+## 📄 Requirements
 
-Example structure:
+**Make sure you have `partner-chains-public-keys.json` in the same directory as the script.**
 
+Your directory should look like this:
+
+```
 .
 ├── check_registration.sh
 └── partner-chains-public-keys.json
+```
 
-The JSON file must contain your validator public keys, like this:
+The JSON file should contain your public keys in the following format:
 
+```json
 {
   "sidechain_pub_key": "0x...",
   "aura_pub_key": "0x...",
   "grandpa_pub_key": "0x..."
 }
-
-✅ Usage
-
-Run the script from your terminal:
-
-./check_registration.sh
-
-It will:
-	•	Extract keys from partner-chains-public-keys.json
-	•	Query the Midnight testnet for the current epoch
-	•	Check if your validator is registered in the current or future epoch
-	•	Display detailed validator information if found
-
-✅ Tested Environment
-
-This script has been tested on:
-
-Midnight Sidechain Node - Testnet - Version: 0.12.0-cab67f3b
-
-
-⸻
-
-Feel free to fork or contribute improvements via pull request.
+```
 
 ---
 
-Let me know if you'd like this saved as a `.md` file or want to add screenshots or example output to the README.
+## 📌 Notes
+
+- The script requires `jq` and `curl` to be installed.
+- Make sure your node or environment can access:  
+  `https://rpc.testnet-02.midnight.network`
+- Useful for confirming validator setup prior to an epoch.
+
+---
+
+Enjoy seamless validation checks!
